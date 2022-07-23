@@ -8,11 +8,11 @@ public class BeginGame : State
     {
 
     }
-    public override IEnumerator Intro()
+    public override IEnumerator Start()
     {
         //Buttons visible with Start Exit functions
         // when player hit start -> go to next state Prepare
-        return base.Intro();
+        return base.Start();
         GameSystem.SetState(new PrepareGame(GameSystem));
     }
 }

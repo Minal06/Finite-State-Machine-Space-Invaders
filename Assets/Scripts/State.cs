@@ -13,29 +13,20 @@ public abstract class State
 
 
     //przepisac state!!!!!!!!
-    // ma zawieraæ np player/enemy/UI/Start
-    public virtual IEnumerator Intro()
+    // ma zawiera np player/enemy/UI/Start
+    public virtual IEnumerator Start()
     {
         yield break;
     }
 
-    public virtual IEnumerator Prepare()
+    public virtual IEnumerator Player()
     {
         yield break;
     }
 
-    public virtual IEnumerator Game()
+    public virtual IEnumerator Enemy()
     {
         yield break;
     }
-
-    public virtual IEnumerator Pause()
-    {
-        yield break;
-    }
-
-    public virtual IEnumerator End()
-    {
-        yield break;
-    }
+      
 }
