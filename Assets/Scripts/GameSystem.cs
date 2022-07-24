@@ -2,21 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameSystem : StateMachine
+namespace SI
 {
-    #region Fields and settings
-    private 
-
-    #endregion
-    // Start is called before the first frame update
-    void Start()
+    public class GameSystem : StateMachine
     {
-        SetState(new BeginGame(this));
-    }
+        #region Fields and settings
+        private
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        #endregion
+        // Start is called before the first frame update
+        void Start()
+        {
+            SetState(new BeginGame(this));
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

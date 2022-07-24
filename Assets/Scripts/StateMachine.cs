@@ -2,15 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StateMachine : MonoBehaviour
+namespace SI
 {
-    protected State State;
-
-    public void SetState(State state)
+    public abstract class StateMachine : MonoBehaviour
     {
-        State = state;
-        StartCoroutine(State.Start());
+        protected State State;
+
+        public void SetState(State state)
+        {
+            State = state;
+            StartCoroutine(State.Start());
+        }
+
     }
-    
 }
- 
