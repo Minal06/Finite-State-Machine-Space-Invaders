@@ -8,15 +8,13 @@ namespace SI
     {
         public PrepareGame(GameSystem gameSystem) : base(gameSystem) { }
 
-        public override IEnumerator Start()
+        public override IEnumerator StartState()
         {
+            Debug.Log("hello from PrepareGame state");
             //Start to spawn enemy, wrote msg with KeyInfo 
-            yield break;
+            yield return new WaitForSeconds(5f);
+            GameSystem.SetState(new GameState(GameSystem));
         }
-
-        public override IEnumerator Enemy()
-        {
-            return base.Enemy();
-        }
-    }
+               
+    }   
 }
