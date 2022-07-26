@@ -13,11 +13,11 @@ namespace SI
         #region Fields and settings for STATES
         [Header("References to UI, Enemy, Player functions")]
         [SerializeField] private CanvasSetup canvasSetup;                  
-        [SerializeField] private GameObject player;
+        [SerializeField] private PlayerController player;
         [SerializeField] private EnemySetup enemyHolder;
 
         //Getters
-        public GameObject Player => player;
+        public PlayerController Player => player;
         public EnemySetup Enemy => enemyHolder;
         public CanvasSetup Canvas => canvasSetup;
 

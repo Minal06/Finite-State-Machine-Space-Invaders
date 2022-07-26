@@ -17,6 +17,28 @@ namespace SI
         public override void UpdateState()
         {
             GameSystem.Enemy.EnemyMove();
+            GameSystem.Player.Movement();
+            GameSystem.Player.Shot();
+            GameSystem.Player.Bounds();
+            GameWon();
+            PauseGame();
+        }
+
+
+        void GameWon()
+        {
+            if(GameSystem.Enemy.Holder.childCount == 1)
+            {
+                GameSystem.SetState(new WonState(GameSystem));
+            }
+        }
+
+        void PauseGame()
+        {
+            if (Input.GetKeyDown(KeyCode.P))
+            {
+                GameSystem.SetState(new PauseState(GameSystem));
+            }
         }
     }    
 }

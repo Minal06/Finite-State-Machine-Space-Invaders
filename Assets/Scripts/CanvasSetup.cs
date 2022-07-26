@@ -28,6 +28,11 @@ namespace SI
         {
             startButton.SetActive(isCanvas);
         }
+
+        public void PauseScrn()
+        {
+            resumeButton.SetActive(isCanvas);            
+        }
         
     }
 }
