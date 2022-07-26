@@ -6,28 +6,42 @@ using UnityEngine;
 using UnityEditor;
 #endif
 
+
 namespace SI
 {
     public class GameSystem : StateMachine
     {
-        #region Fields and settings for STATES
+        #region Fields and settings for STATES + Getters
         [Header("References to UI, Enemy, Player functions")]
         [SerializeField] private CanvasSetup canvasSetup;                  
         [SerializeField] private PlayerController player;
         [SerializeField] private EnemySetup enemyHolder;
-
+        
         //Getters
         public PlayerController Player => player;
         public EnemySetup Enemy => enemyHolder;
-        public CanvasSetup Canvas => canvasSetup;
+        public CanvasSetup Canvas => canvasSetup;      
 
         #endregion
 
+        #region Singleton
+        public static GameSystem SharedInstance { get; private set; }
+
+        private void Awake()
+        {
+            if (SharedInstance != null)
+            {
+                Destroy(gameObject);
+                return;
+            }
+            SharedInstance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        #endregion
 
         // Start is called before the first frame update
         void Start()
-        {            
-            //enemyHolder = GetComponent<EnemySetup>();
+        {                        
             SetState(new BeginGame(this));
         }
 
@@ -41,7 +55,6 @@ namespace SI
         #region Menu buttons
         public void StartButton()
         {
-
             State.ExitState();
         }
         public void Exit()

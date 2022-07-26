@@ -7,21 +7,26 @@ namespace SI
 {
     public class PrepareGame : State
     {
-        private float preparationTime = 5;
+        private float preparationTime = 5;        
         public PrepareGame(GameSystem gameSystem) : base(gameSystem) { }
 
         public override void StartState()
         {
             Debug.Log("PrepareGame state");
+            GameSystem.Canvas.PreparationScrn(true);
+            GameSystem.Canvas.timer.text = preparationTime.ToString("F0"); 
             GameSystem.Enemy.EnemyPrepare();
-            //Start to spawn enemy, wrote msg with KeyInfo 
-            //wait for 5 sec
+                       
             
         }
 
         public override void UpdateState()
         {
             Preparation();            
+        }
+        public override void ExitState()
+        {
+            GameSystem.Canvas.PreparationScrn(false);
         }
 
 
@@ -30,9 +35,13 @@ namespace SI
             if (preparationTime > 0)
             {
                 preparationTime -= Time.deltaTime;
+                GameSystem.Canvas.timer.text = preparationTime.ToString("F0");
             }
-            else         
-            GameSystem.SetState(new GameState(GameSystem));
+            else
+            {
+                ExitState();
+                GameSystem.SetState(new GameState(GameSystem));
+            }           
         }       
                
     }   

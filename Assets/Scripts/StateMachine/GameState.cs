@@ -17,11 +17,19 @@ namespace SI
         public override void UpdateState()
         {
             GameSystem.Enemy.EnemyMove();
+            GameSystem.Enemy.FasterEnemy();
+            GameSystem.Enemy.EnemyAttack();
+
             GameSystem.Player.Movement();
             GameSystem.Player.Shot();
             GameSystem.Player.Bounds();
             GameWon();
             PauseGame();
+        }
+
+        public override void ExitState()
+        {
+            GameSystem.SetState(new LostState(GameSystem));
         }
 
 
@@ -40,5 +48,6 @@ namespace SI
                 GameSystem.SetState(new PauseState(GameSystem));
             }
         }
+                
     }    
 }

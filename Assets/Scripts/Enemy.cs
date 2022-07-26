@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SI
 {
-    public class Enemy : MonoBehaviour, IKillable
+    public class Enemy : EnemySetup, IKillable
     {
         public int scoreValue { get; private set; }
         [SerializeField] int pointsForThisEnemy;

@@ -19,7 +19,6 @@ namespace SI
         [Header("Enemy Speed and Reach and Fire")]
         [SerializeField] float eSpeed;
         [SerializeField] float eRange;
-        //[SerializeField] float eDrop;
         [SerializeField] float eFireRate;
         [SerializeField] float lastEnemySpeed;
         [SerializeField] float gameOverLine;
@@ -63,12 +62,7 @@ namespace SI
 
                 if (enemy.position.x <= -eRange || enemy.position.x >= eRange)
                 {
-                    eSpeed = -eSpeed;
-
-                    //holder.position += Vector3.back * eDrop;
-                    //Vector3 position = transform.position;
-                    //position.z -= eDrop;
-                    //transform.position = position;                
+                    eSpeed = -eSpeed;                                
 
                     return;
                 }
@@ -76,41 +70,33 @@ namespace SI
             }
         }
 
-        //void EnemyAttack()
-        //{
-        //    foreach (Transform enemy in holder)
-        //    {
-        //        if (!enemy.gameObject.activeInHierarchy)
-        //        {
-        //            continue;
-        //        }
-        //        if (Random.value < (eFireRate / holder.childCount))
-        //        {
-        //            GameObject pooledProjectile = ObjectPooler.SharedInstance.GetPooledBullet("EnemyBullet");
-        //            if (pooledProjectile != null)
-        //            {
-        //                pooledProjectile.SetActive(true); // activate it
-        //                pooledProjectile.transform.position = enemy.transform.position; //position at enemy
-        //            }
-        //        }
-
-        //    }
-        //}
-
-        void FasterEnemy()
+        public void EnemyAttack()
         {
-            if (holder.childCount == 1)
+            foreach (Transform enemy in holder)
+            {
+                if (!enemy.gameObject.activeInHierarchy)
+                {
+                    continue;
+                }
+                if (Random.value < (eFireRate / holder.childCount))
+                {
+                    GameObject pooledProjectile = BulletPooler.SharedInstance.AllocatePooledBullet("EnemyBullet");
+                    if (pooledProjectile != null)
+                    {
+                        pooledProjectile.SetActive(true); // activate it
+                        pooledProjectile.transform.position = enemy.transform.position; //position at enemy
+                    }
+                }
+
+            }
+        }
+
+        public void FasterEnemy()
+        {
+            if (holder.childCount == 2)
             {
                 transform.position += (eDirection * eSpeed * Time.deltaTime) * lastEnemySpeed;
             }
         }
-
-        //void GameWin()
-        //{
-        //    if (holder.childCount == 0)
-        //    {
-        //        gameManager.GameOver();
-        //    }
-        //}
     }
 }

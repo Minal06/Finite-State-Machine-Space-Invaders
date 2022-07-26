@@ -9,31 +9,19 @@ namespace SI
         private float horizontalInput;
         [Header("Player Setup")]
         [SerializeField] float speed = 20.0f;
-        [SerializeField] float xRange = 20;
-        [SerializeField] GameObject health1, health2, health3;
-        //static nie powinien sie tu znajdowaæ
-        //public static int pHealth = 3;
-
-
-        //[SerializeField] GameManager gameManager;
+        [SerializeField] float horizontalRange = 20;
+        [SerializeField] float reloadTime;              
+        private bool isReloading = false;
+                      
 
         private void Awake()
         {
 
         }
 
-
         // Update is called once per frame
         void Update()
-        {
-            //// Check for left and right bounds
-            //Bounds();
-
-            //// Player movement left to right
-            //Movement();
-
-            ////shooting
-            //Shot();
+        {            
 
         }
 
@@ -47,57 +35,37 @@ namespace SI
         {
             if (Input.GetKeyDown(KeyCode.Space))
             {
-                GameObject pooledProjectile = BulletPooler.SharedInstance.AllocatePooledBullet("PlayerBullet");
-                if (pooledProjectile != null)
+                if (!isReloading) 
                 {
-                    pooledProjectile.SetActive(true); // activate it
-                    pooledProjectile.transform.position = transform.position; // position it at player
+                    GameObject pooledProjectile = BulletPooler.SharedInstance.AllocatePooledBullet("PlayerBullet");
+                    if (pooledProjectile != null)
+                    {
+                        pooledProjectile.SetActive(true); // activate it
+                        pooledProjectile.transform.position = transform.position; // position it at player
+                    }
+                    Invoke("Reload", reloadTime);
+                    isReloading = true;
                 }
+                
             }
         }
 
         public void Bounds()
         {
-            if (transform.position.x < -xRange)
+            if (transform.position.x < -horizontalRange)
             {
-                transform.position = new Vector3(-xRange, transform.position.y, transform.position.z);
+                transform.position = new Vector3(-horizontalRange, transform.position.y, transform.position.z);
             }
 
-            if (transform.position.x > xRange)
+            if (transform.position.x > horizontalRange)
             {
-                transform.position = new Vector3(xRange, transform.position.y, transform.position.z);
+                transform.position = new Vector3(horizontalRange, transform.position.y, transform.position.z);
             }
         }
 
-        //void IsPlayerKilled()
-        //{
-        //    switch (pHealth)
-        //    {
-        //        case 3:
-        //            health1.gameObject.SetActive(true);
-        //            health2.gameObject.SetActive(true);
-        //            health3.gameObject.SetActive(true);
-        //            break;
-        //        case 2:
-        //            health1.gameObject.SetActive(true);
-        //            health2.gameObject.SetActive(true);
-        //            health3.gameObject.SetActive(false);
-        //            break;
-        //        case 1:
-        //            health1.gameObject.SetActive(true);
-        //            health2.gameObject.SetActive(false);
-        //            health3.gameObject.SetActive(false);
-        //            break;
-
-        //        case 0:
-        //            health1.gameObject.SetActive(false);
-        //            health2.gameObject.SetActive(false);
-        //            health3.gameObject.SetActive(false);
-        //            Destroy(gameObject);
-        //            gameManager.PlayerIsDead();
-        //            gameManager.GameOver();
-        //            break;
-        //    }
-        //}
+        private void Reload()
+        {
+            isReloading = false;
+        }             
     }
 }

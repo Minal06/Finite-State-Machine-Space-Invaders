@@ -1,17 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 
 namespace SI
 {
     public class CanvasSetup : MonoBehaviour
     {
-        [SerializeField] GameObject startButton;
-        [SerializeField] GameObject resumeButton;
-        [SerializeField] GameObject exitButton;
-        [SerializeField] GameObject canvas;
-        bool isCanvas = false;
+        [SerializeField] private GameObject startButton;
+        [SerializeField] private GameObject resumeButton;
+        [SerializeField] private GameObject exitButton;
+        [SerializeField] private GameObject canvas;
+        [SerializeField] private GameObject preparationInfo;
+        public TextMeshPro timer;
+        bool isCanvas = false;               
 
         private void Start()
         {            
@@ -32,6 +35,11 @@ namespace SI
         public void PauseScrn()
         {
             resumeButton.SetActive(isCanvas);            
+        }
+
+        public void PreparationScrn(bool t)
+        {
+            preparationInfo.SetActive(t);
         }
         
     }
