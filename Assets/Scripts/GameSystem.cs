@@ -10,21 +10,24 @@ namespace SI
 {
     public class GameSystem : StateMachine
     {
-        #region Fields and settings
-        [Header("UI and Buttons")]
-        public GameObject _canvas;
-        public GameObject startButton;
-        public GameObject resumeButton;
-        public GameObject exitButton;
-        bool isCanvas;
+        #region Fields and settings for STATES
+        [Header("References to UI, Enemy, Player functions")]
+        [SerializeField] private CanvasSetup canvasSetup;                  
+        [SerializeField] private GameObject player;
+        [SerializeField] private EnemySetup enemyHolder;
 
+        //Getters
+        public GameObject Player => player;
+        public EnemySetup Enemy => enemyHolder;
+        public CanvasSetup Canvas => canvasSetup;
 
         #endregion
 
 
         // Start is called before the first frame update
         void Start()
-        {
+        {            
+            //enemyHolder = GetComponent<EnemySetup>();
             SetState(new BeginGame(this));
         }
 
@@ -35,16 +38,11 @@ namespace SI
         }
 
 
-        public void GoCanvas() 
-        {
-            isCanvas = !isCanvas;
-            _canvas.SetActive(isCanvas);
-        }
-
-        #region StartMenu buttons
+        #region Menu buttons
         public void StartButton()
         {
-            StartCoroutine(State.ExitState());
+
+            State.ExitState();
         }
         public void Exit()
         {

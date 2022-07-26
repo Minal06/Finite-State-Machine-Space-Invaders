@@ -13,19 +13,19 @@ namespace SI
         }
 
         
-        public virtual IEnumerator StartState()
+        public virtual void StartState()
         {
-            yield break;
+            
         }
 
-        public virtual IEnumerator UpdateState()
+        public virtual void UpdateState()
         {
-            yield break;
+            
         }
 
-        public virtual IEnumerator ExitState()
+        public virtual void ExitState()
         {
-            yield break;
+            
         }
 
     }

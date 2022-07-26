@@ -8,11 +8,15 @@ namespace SI
     {
         public GameState(GameSystem gameSystem) : base(gameSystem) { }
 
-        public override IEnumerator StartState()
+        public override void StartState()
         {
             Debug.Log("GameState now");
-            yield break;
+            
         }
 
+        public override void UpdateState()
+        {
+            GameSystem.Enemy.EnemyMove();
+        }
     }    
 }

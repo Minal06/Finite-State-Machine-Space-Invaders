@@ -9,7 +9,7 @@ namespace SI
         public void SetState(State state)
         {
             State = state;
-            StartCoroutine(State.StartState());
+            State.StartState();
         }
 
     }

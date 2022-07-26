@@ -10,24 +10,21 @@ namespace SI
         public BeginGame(GameSystem gameSystem) : base(gameSystem)
         {
 
-        }                
+        }
 
-        public override IEnumerator StartState()
+        public override void StartState()
         {            
-            GameSystem._canvas.SetActive(true);
-            GameSystem.startButton.SetActive(true);
-            GameSystem.exitButton.SetActive(true);
-            //GameSystem.GoCanvas();
-            yield break;
+            //GameSystem._canvas.SetActive(true);            
+            GameSystem.Canvas.GoCanvas();
+            GameSystem.Canvas.StartScrn();
         }
-        public override IEnumerator ExitState()
+        public override void ExitState()
         {            
-            GameSystem._canvas.SetActive(false);
-            GameSystem.startButton.SetActive(false);            
-            //GameSystem.GoCanvas();
+            //GameSystem._canvas.SetActive(false);            
+            GameSystem.Canvas.GoCanvas();
+            GameSystem.Canvas.StartScrn();
             GameSystem.SetState(new PrepareGame(GameSystem));
-            yield break;                     
         }
-         
+
     }
 }
