@@ -1,6 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using System.IO;
 
 namespace SI
 {
@@ -8,9 +9,9 @@ namespace SI
     {
         [Header("Enemy Spawn Setup")]
         [SerializeField] Transform holder;
-        [SerializeField] Transform enemyPref;
+        [SerializeField] Transform[] prefabs;       
         [SerializeField] Transform topLeftEnemy;
-
+        
         [Header("Enemy Spawn Options")]
         [SerializeField] int rows;
         [SerializeField] int columns;
@@ -20,19 +21,39 @@ namespace SI
         [SerializeField] float eSpeed;
         [SerializeField] float eRange;
         [SerializeField] float eFireRate;
-        [SerializeField] float lastEnemySpeed;
-        [SerializeField] float gameOverLine;
+        [SerializeField] int eDamage;
+        [SerializeField] float lastEnemySpeed;        
         private Vector3 eDirection = Vector3.right;
 
         public Transform Holder => holder;
 
-
-        private void Update()
+        [System.Serializable]
+        public class EnemyData
+        {            
+            public float speed;
+            public float fireRate;
+            public int damage;
+        }     
+       
+        private void Start()
         {
-            //EnemyMove();
-            //FasterEnemy();
-            //GameWin();
-            //EnemyAttack();
+            LoadEnemyStats();
+        }
+        
+        void LoadEnemyStats()
+        {
+            string path = Application.dataPath + "/EnemyData/EnemyData.json";
+            if (File.Exists(path))
+            {
+                string json = File.ReadAllText(path);
+                EnemyData data = JsonUtility.FromJson<EnemyData>(json);
+
+                eSpeed = data.speed;
+                eFireRate = data.fireRate;
+                eDamage = data.damage;
+            }
+            else
+                Debug.Log("No File with Enemy Data");            
         }
 
         public void EnemyPrepare()
@@ -43,7 +64,7 @@ namespace SI
                 for (int col = 0; col < columns; col++)
                 {
                     Vector3 startingPos = new Vector3(topLeftEnemy.position.x + col * space, topLeftEnemy.position.y, topLeftEnemy.position.z - row * space);
-                    Transform _enemy = Instantiate(enemyPref, startingPos, Quaternion.identity);
+                    Transform _enemy = Instantiate(prefabs[row], startingPos, Quaternion.identity);
                     _enemy.SetParent(holder);
                 }
             }

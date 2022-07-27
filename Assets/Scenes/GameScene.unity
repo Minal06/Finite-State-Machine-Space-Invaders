@@ -1087,16 +1087,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   holder: {fileID: 1105728144}
-  enemyPref: {fileID: 510193183170853805, guid: 4ca561ddfea0b5d4cbae2e9a537ac214, type: 3}
+  prefabs:
+  - {fileID: 510193183170853805, guid: 6631f46388b225045803275e5cebdfef, type: 3}
+  - {fileID: 510193183170853805, guid: 83cd2a0772de46048a557cf6a1bcafd9, type: 3}
+  - {fileID: 510193183170853805, guid: 4ca561ddfea0b5d4cbae2e9a537ac214, type: 3}
   topLeftEnemy: {fileID: 1756277721}
-  rows: 5
+  rows: 3
   columns: 7
   space: 5
   eSpeed: 5
   eRange: 30
   eFireRate: 0.003
+  eDamage: 0
   lastEnemySpeed: 2
-  gameOverLine: 12
 --- !u!4 &1105728144
 Transform:
   m_ObjectHideFlags: 0
