@@ -15,9 +15,7 @@ namespace SI
             Debug.Log("PrepareGame state");
             GameSystem.Canvas.PreparationScrn(true);
             GameSystem.Canvas.timer.text = preparationTime.ToString("F0"); 
-            GameSystem.Enemy.EnemyPrepare();
-                       
-            
+            GameSystem.Enemy.EnemyPrepare();                                     
         }
 
         public override void UpdateState()

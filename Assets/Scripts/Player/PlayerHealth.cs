@@ -20,7 +20,7 @@ namespace SI {
 
         public void Damage(float damageTaken)
         {
-            Health -= damageTaken;               
+            Health -= damageTaken;                       
 
             if (Health < 0)
                 Health = 0;

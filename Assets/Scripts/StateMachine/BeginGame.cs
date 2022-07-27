@@ -13,16 +13,18 @@ namespace SI
         }
 
         public override void StartState()
-        {            
-            //GameSystem._canvas.SetActive(true);            
-            GameSystem.Canvas.GoCanvas();
-            GameSystem.Canvas.StartScrn();
+        {              
+            //True            
+            GameSystem.Canvas.GoCanvas(true);
+            GameSystem.Canvas.StartScrn(true);
+            GameSystem.Canvas.ExitButton(true);
         }
         public override void ExitState()
         {            
-            //GameSystem._canvas.SetActive(false);            
-            GameSystem.Canvas.GoCanvas();
-            GameSystem.Canvas.StartScrn();
+            //False            
+            GameSystem.Canvas.GoCanvas(false);
+            GameSystem.Canvas.StartScrn(false);
+            GameSystem.Canvas.ExitButton(false);
             GameSystem.SetState(new PrepareGame(GameSystem));
         }
 

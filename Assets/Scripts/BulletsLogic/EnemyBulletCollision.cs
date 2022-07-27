@@ -6,15 +6,18 @@ namespace SI
 {
     public class EnemyBulletCollision : MonoBehaviour, IKillable
     {
-        
-        private void OnTriggerEnter(Collider other)
-        {                                 
+        public int attackValue;
+
+        private void OnTriggerEnter(Collider other)        {          
+
             switch (other.gameObject.tag)
-            {                
+            {         
+                
                 case "Player":                    
                     var damageable = other.gameObject.GetComponent<PlayerHealth>();
-                    if (damageable == null) return;
-                    damageable.Damage(1);
+                    if (damageable == null) return;                    
+                    damageable.Damage(attackValue);
+                    GameEvent.current.DamageTaken();
                     Kill();
                     break;
                 case "PlayerBullet":

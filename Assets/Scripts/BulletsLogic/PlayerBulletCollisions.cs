@@ -13,9 +13,9 @@ namespace SI
 
             switch (other.gameObject.tag)
             {
-                case "Base":
-                    Kill();
-                    break;
+                //case "Base":
+                //    Kill();
+                //    break;
 
                 case "Enemy":
 

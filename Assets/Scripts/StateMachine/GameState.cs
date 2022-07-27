@@ -35,7 +35,7 @@ namespace SI
 
         void GameWon()
         {
-            if(GameSystem.Enemy.Holder.childCount == 1)
+            if(GameSystem.Enemy.Holder.childCount == 0)
             {
                 GameSystem.SetState(new WonState(GameSystem));
             }
